@@ -1,7 +1,7 @@
 import React from 'react';
+
 import Slider from '../components/Slider';
-
-
+import Logout from '../components/Logout';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -39,23 +39,26 @@ export default class Main extends React.Component {
 
     render() {
         const { salary, expense, savings, election } = this.state;
+        const { firstname } = this.props;
         console.log(this.state, 'state');
         return (
             <div>
+                <p>Welcome {firstname}</p>
                 <div>
-                    <Slider handleElection={this.handleElection} />
+                    <Slider election={election} handleElection={this.handleElection} />
                 </div>
-                <div id='input-fields'>
-                    <p>Salary</p>
+                <div id='input-fields-container'>
+                    <p className='field-title'>Salary</p>
                     <input type='number' onChange={(e) => {
                         this.setState({ salary: e.target.value })
                         this.calculate()
                     }} value={salary} />
-                    <p>Expense</p>
+                    <p className='field-title'>Expense</p>
                     <p> {expense} </p>
-                    <p>Savings</p>
+                    <p className='field-title'>Savings</p>
                     <p>{savings}</p>
                 </div>
+                <Logout logOut={this.props.setLogout} />
             </div>
         )
     }

@@ -37,7 +37,7 @@
   }
 }
 
-#input-fields {
+#input-fields-container {
   display: flex;
   flex-direction: column;
 }
