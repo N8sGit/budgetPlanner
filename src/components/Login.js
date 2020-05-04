@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { connect } from 'react-redux';
 
-export default function Login(props) {
+import { login } from '../redux';
+
+function Login(props) {
     const [bool, showError] = useState(false);
     return (
         <div>
-            <h2>Please login </h2>
+            <h3>To plan your budget please login </h3>
             {bool ? <p>There was an error logging in. Please try again</p> : null}
             <GoogleLogin
                 clientId="368994794866-m0pdjh8ee8mipldasevv400v9cmmrqjg.apps.googleusercontent.com"
@@ -13,7 +16,7 @@ export default function Login(props) {
                 isSignedIn={true}
                 onSuccess={(response) => {
                     showError(false);
-                    props.setLogin(response.profileObj.givenName)
+                    props.login(response.profileObj.givenName)
                 }}
                 onFailure={() => {
                     showError(true)
@@ -22,3 +25,11 @@ export default function Login(props) {
             />
         </div>)
 }
+
+
+const mapDispatchToProps = {
+    login,
+};
+
+
+export default connect(null, mapDispatchToProps)(Login);
